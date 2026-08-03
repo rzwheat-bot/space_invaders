@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# High Score data (players can keep their own local scores)
+high_scores.json
+
+# IDE configurations
+.vscode/
+.idea/
