@@ -140,7 +140,7 @@ class Invader(pygame.sprite.Sprite):
     def update(self, direction_x, step_down):
         self.rect.x += direction_x
         if step_down:
-            self.rect.y += 15
+            self.rect.y += 8
 
 class UFO(pygame.sprite.Sprite):
     def __init__(self):
@@ -216,13 +216,12 @@ class Game:
         self.create_all_bunkers()
 
     def create_invader_grid(self):
-        # 5 rows of 11 invaders
-        # Rows: 1 squid (top), 2 crabs (middle), 2 octopus (bottom)
-        row_types = ["squid", "crab", "crab", "octopus", "octopus"]
+        # 4 rows of 8 invaders (making it easier to clear before they descend)
+        row_types = ["squid", "crab", "octopus", "octopus"]
         for row, r_type in enumerate(row_types):
-            for col in range(11):
-                x = 50 + col * 45
-                y = 120 + row * 40
+            for col in range(8):
+                x = 80 + col * 55
+                y = 120 + row * 45
                 self.invaders.add(Invader(x, y, r_type))
 
     def create_bunker(self, start_x, start_y):
@@ -295,9 +294,9 @@ class Game:
 
     def fire_laser(self):
         if self.laser_cooldown <= 0:
-            # Spawn laser from player top center
-            self.player_lasers.add(Laser(self.player.rect.centerx, self.player.rect.top, -7, GREEN))
-            self.laser_cooldown = 35 # frames cooldown (~0.5s)
+            # Spawn laser from player top center (faster laser speed and lower cooldown)
+            self.player_lasers.add(Laser(self.player.rect.centerx, self.player.rect.top, -9, GREEN))
+            self.laser_cooldown = 18 # frames cooldown (~0.3s)
 
     def invaders_shoot(self):
         # Pick random column invaders to shoot
@@ -388,8 +387,8 @@ class Game:
         if reached_boundary:
             self.invader_direction *= -1
             step_down = True
-            # Speed increases slightly on step down
-            self.invader_speed += 0.15
+            # Speed increases slightly on step down (slower increase rate)
+            self.invader_speed += 0.05
 
         self.invaders.update(self.invader_direction * self.invader_speed, step_down)
 
