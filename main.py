@@ -452,7 +452,13 @@ class Game:
         
         # Subtitle
         play_surf = self.font_menu.render("PRESS SPACE TO PLAY", True, WHITE)
-        self.screen.blit(play_surf, (SCREEN_WIDTH // 2 - play_surf.get_width() // 2, 220))
+        self.screen.blit(play_surf, (SCREEN_WIDTH // 2 - play_surf.get_width() // 2, 200))
+        
+        # Instructions
+        move_instr = self.font_hud.render("MOVE: A/D or ARROW KEYS", True, YELLOW)
+        fire_instr = self.font_hud.render("FIRE: SPACEBAR", True, YELLOW)
+        self.screen.blit(move_instr, (SCREEN_WIDTH // 2 - move_instr.get_width() // 2, 245))
+        self.screen.blit(fire_instr, (SCREEN_WIDTH // 2 - fire_instr.get_width() // 2, 270))
         
         # Leaderboard Quick View
         lead_title = self.font_menu.render("TOP TEN COMMANDERS", True, YELLOW)
